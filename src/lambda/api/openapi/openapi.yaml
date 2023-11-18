@@ -1,0 +1,52 @@
+openapi: 3.0.1
+info:
+  title: "Pushes API"
+  version: 0.0.1
+paths:
+  "/pushes":
+    get:
+      operationId: GetPushes # Optional better type name then pushesList
+      description: Get all Pushes
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Push"
+
+  "/pushes/{id}":
+    get:
+      operationId: GetPushById # Optional better type name then pushesDetail
+      description: Get a push by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Push"
+
+components:
+  schemas:
+    Push:
+      type: object
+      properties:
+        id:
+          type: number
+        type:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - type
+        - name
